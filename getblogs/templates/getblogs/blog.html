@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Blog</title>
+</head>
+
+<body>
+    <div class="container" style="width: 700px;">
+        <div class="col-12 mt-3">
+            <h1 id="blog_title" class=""></h1>
+            <div class="float-left">
+                <p id="author_name" style="height: 10px;"></p>
+                <p id="details"></p>
+            </div>
+        </div>
+
+    </div>
+    
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    {% block javascript %}
+    <script type="text/javascript">
+
+        var data = JSON.parse("{{data|escapejs}}");
+
+        console.log(data)
+        blog_title = document.getElementById('blog_title');
+        author_name = document.getElementById('author_name');
+        details = document.getElementById('details');
+        for (var x in data) {
+            blog_title.innerHTML += data[x].blog_title + '<br><br>';
+            author_name.innerHTML += data[x].author_name + '<br><br>';
+            details.innerHTML += data[x].details_div + '<br><br>';
+        }
+
+       
+
+
+    </script>
+    {% endblock javascript %}
+</body>
+
+</html>

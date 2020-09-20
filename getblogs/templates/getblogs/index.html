@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="jumbotron">
+        <center>
+            <h1>Medium.com Smart Srapping</h1>
+            <a href="/" class="btn btn-danger">Refresh News</a>
+
+
+        </center>
+
+        <form class="col-lg-6 offset-lg-3 " id="user_form">
+            <div class="row justify-content-center mt-3">
+                <input type="text" class="form-control" id="tag_name" name="tag_name" placeholder="Enter Keyword">
+                <span class="input-group-btn mt-3">
+                    <button class="btn btn-primary">Search Blog</button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <div class="row" id="row1">
+            
+
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    {% block javascript %}
+    <script type="text/javascript">
+        $("form#user_form").submit(function () {
+            var tagInput = $('input[name="tag_name"]').val().trim();
+            if (tagInput) {
+                $.ajax({
+
+                    url: '{% url "search" %}',
+                    data: {
+                        'tag_name': tagInput,
+                        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log("success");
+                        if (data.blog_dict) {
+                            console.log("success1");
+                            addBlogTable(data.blog_dict);
+
+                        }
+                    }
+                });
+            }
+            $('form#user_form').trigger("reset");
+            return false;
+        });
+
+        function addBlogTable(blog_dict) {
+            $("#blogTable").empty();
+            console.log("json file: ", blog_dict)
+
+            for (var key in blog_dict) {
+
+                var blog_link = '{% url "blogcontent" %}';
+
+                $("#row1").append(`<div class="card-body col-md-12"><h2 class="title" name="title"> <a href="` + blog_link + `?blog_url=${blog_dict[key].blog_link}"> ${blog_dict[key].title}</a></h2><h4 class="author" name="author">Creator:-${blog_dict[key].author_name}, Date:-${blog_dict[key].date}</h4><h4 class="details" name="details">${blog_dict[key].reading_time}</h4></div><br>`);
+
+                
+            }
+        }
+
+
+
+    </script>
+    {% endblock javascript %}
+</body>
+
+</html>
