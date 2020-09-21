@@ -17,10 +17,13 @@
     <div class="container" style="width: 700px;">
         <div class="col-12 mt-3">
             <h1 id="blog_title" class=""></h1>
-            <div class="float-left">
+            <div class="float-left col-12">
                 <p id="author_name" style="height: 10px;"></p>
                 <p id="details"></p>
             </div>
+        </div>
+        <div class="" id="tag_names">
+            
         </div>
 
     </div>
@@ -47,11 +50,17 @@
         blog_title = document.getElementById('blog_title');
         author_name = document.getElementById('author_name');
         details = document.getElementById('details');
-        for (var x in data) {
-            blog_title.innerHTML += data[x].blog_title + '<br><br>';
-            author_name.innerHTML += data[x].author_name + '<br><br>';
-            details.innerHTML += data[x].details_div + '<br><br>';
-        }
+        tag_names = document.getElementById('tag_names');
+        
+        blog_title.innerHTML += data.blog_title + '<br><br>';
+        author_name.innerHTML += data.author_name + '<br><br>';
+        details.innerHTML += data.details_div + '<br><br>';
+        var search_link = '{% url "home" %}';
+        for(var x=0 ;x<(data.tag_names).length;x++){
+            $("#tag_names").append(`<ul style="float:left;list-style-type:none;"><li  style="float: left; border: 1px solid black;"> <a href="`+search_link +`?tag_name=`+ data.tag_names[x]+`">`+data.tag_names[x]+`</a> </li></ul>`);
+
+        } 
+        
 
        
 
@@ -61,3 +70,4 @@
 </body>
 
 </html>
+

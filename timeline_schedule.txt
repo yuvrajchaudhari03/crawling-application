@@ -1,0 +1,6 @@
+Phase 1 - Develop views.py and index file which fetch blog title, details
+and created by(author_name) according to tag name which we enter and shows on
+index.html page.  Time- 2 Days
+
+Phase 2 - After click on blog which are listed in index.py, fetch full content
+of blog that from medium.com. Time - 3 Days 
