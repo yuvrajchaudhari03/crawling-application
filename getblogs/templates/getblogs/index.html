@@ -6,7 +6,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-
+<style>
+    .card-body{
+        border-radius: 3px;
+    }
+</style>
 <body>
     <div class="jumbotron">
         <center>
@@ -88,7 +92,7 @@
 
                 var blog_link = '{% url "blogcontent" %}';
 
-                $("#row1").append(`<div class="card-body col-md-12"><h2 class="title" name="title"> <a href="` + blog_link + `?blog_url=${blog_dict[key].blog_link}"> ${blog_dict[key].title}</a></h2><h4 class="author" name="author">Creator:-${blog_dict[key].author_name}, Date:-${blog_dict[key].date}</h4><h4 class="details" name="details">${blog_dict[key].reading_time}</h4></div><br>`);
+                $("#row1").append(`<div class="card-body col-md-12 mb-4" style="border: 1px solid black;border-radius: 22px; border-color:#c2c4c3;box-shadow: 2px 2px 4px #000000;padding-left: 72px;"><h2 class="title" name="title"> <a href="` + blog_link + `?blog_url=${blog_dict[key].blog_link}"> ${blog_dict[key].title}</a></h2><h4 class="author" name="author">Creator:-${blog_dict[key].author_name}, Date:-${blog_dict[key].date}</h4><h4 class="details" name="details">${blog_dict[key].reading_time}</h4></div><br>`);
             }
         }
     </script>
