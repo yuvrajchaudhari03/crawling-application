@@ -3,8 +3,6 @@ from django.http import HttpResponse
 from collections import defaultdict
 import requests
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from getpass import getpass
 import json
 from django.http import JsonResponse
 import http.cookiejar
