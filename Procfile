@@ -1,1 +1,1 @@
-web: gunicorn crawling-application.wsgi --log-file -
+web: gunicorn blogCrawler.wsgi --log-file -
